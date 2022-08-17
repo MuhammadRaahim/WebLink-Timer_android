@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Timmer</string>
+    <string name="str_link_one">Link 1</string>
+    <string name="str_link_two">Link 2</string>
+    <string name="str_link_three">Link 3</string>
+    <string name="str_link_four">Link 4</string>
+    <string name="str_link_timer">Link Timer</string>
+    <string name="str_total_points">Total Points:-</string>
+    <string name="str_link_4_duration">Link 4 Duration</string>
+    <string name="str_link_3_duration">Link 3 Duration</string>
+    <string name="str_link_2_duration">Link 2 Duration</string>
+    <string name="str_link_1_duration">Link 1 Duration</string>
+    <string name="str_reset">Reset</string>
+    <string name="str_kashif_mirza">Kashif Mirza</string>
+</resources>

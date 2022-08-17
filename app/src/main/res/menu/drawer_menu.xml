@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_link_one"
+        android:title="@string/str_link_one" />
+    <item
+        android:id="@+id/nav_link_two"
+        android:title="@string/str_link_two" />
+    <item
+        android:id="@+id/nav_link_three"
+        android:title="@string/str_link_three" />
+    <item
+        android:id="@+id/nav_link_foure"
+        android:title="@string/str_link_four" />
+</menu>
