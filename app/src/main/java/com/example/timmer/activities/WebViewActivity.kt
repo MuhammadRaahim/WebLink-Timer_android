@@ -12,6 +12,7 @@ import android.view.WindowManager
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.timmer.databinding.ActivityWebViewBinding
@@ -26,6 +27,7 @@ class WebViewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWebViewBinding
     private lateinit var linkId: String
     private lateinit var linkAddress: String
+    private lateinit var handler: Handler
     private var statTime = 0L
     private var endTime = 0L
     var points: Int = 0
@@ -35,8 +37,8 @@ class WebViewActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         binding = ActivityWebViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initViews()
 
+        initViews()
     }
 
     override fun onResume() {
@@ -46,46 +48,36 @@ class WebViewActivity : AppCompatActivity() {
     }
 
     private fun calculatePoints() {
-        val handler: Handler = Handler(Looper.getMainLooper())
+        handler= Handler(Looper.getMainLooper())
         handler.postDelayed(object : Runnable {
             override fun run() {
                     points += 1
-                    handler.postDelayed(this, 60000)
-                    finishActivity()
-
+                    Toast.makeText(this@WebViewActivity,points.toString(),Toast.LENGTH_SHORT).show()
+                    finishActivity(this)
             }
         }, 60000)
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        saveLinkDuration()
-        savePoints()
+    private fun finishActivity(runnable: Runnable) {
+        if (points == 2){
+            handler.removeCallbacksAndMessages(null)
+            finish()
+        }else{
+            handler.postDelayed(runnable, 60000)
+        }
     }
 
     private fun saveLinkDuration() {
         endTime = System.currentTimeMillis()
         var duration  = (endTime - statTime)/1000
         if (Paper.book().contains(linkId)){
-            val xDuration:Long = Paper.book().read(POINTS)!!
+            val xDuration:Long = Paper.book().read(linkId)!!
             val tDuration = xDuration + duration
             Paper.book().write(linkId, tDuration)
         }else{
             Paper.book().write(linkId, duration)
         }
     }
-
-    fun  finishActivity(){
-        if (points == 2){
-            saveLinkDuration()
-            savePoints()
-            val intent = Intent(this@WebViewActivity, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-            finish()
-        }
-    }
-
 
     private fun savePoints() {
         if (Paper.book().contains(POINTS)){
@@ -121,7 +113,6 @@ class WebViewActivity : AppCompatActivity() {
         webView.settings.javaScriptEnabled = true
         webView.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
         webView.loadUrl(url)
-
         val webViewClient: WebViewClient = object: WebViewClient() {
 
             override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {

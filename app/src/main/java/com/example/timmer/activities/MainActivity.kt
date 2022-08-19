@@ -24,6 +24,8 @@ import com.example.timmer.utils.Constants.Companion.LINK_TWO
 import com.example.timmer.utils.Constants.Companion.POINTS
 import com.google.android.material.navigation.NavigationView
 import io.paperdb.Paper
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
@@ -68,11 +70,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun setDuration(linkId: String, tv: TextView) {
         var duration:Long = Paper.book().read(linkId)!!
-        if (duration<60){
-            tv.text = "${duration}s"
+        if (duration < 60){
+            tv.text = duration.toString().plus(" s")
         }else {
             duration /= 60
-            tv.text = "${duration}min"
+            tv.text = duration.toString().plus(" min")
         }
     }
 
