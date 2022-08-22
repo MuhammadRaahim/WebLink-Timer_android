@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 resetData()
             }
             ivYoutube.setOnClickListener {
-                val url = "https://www.youtube.com/"
+                val url = getString(R.string.str_youtube_link)
                 val i = Intent(Intent.ACTION_VIEW)
                 i.data = Uri.parse(url)
                 startActivity(i)

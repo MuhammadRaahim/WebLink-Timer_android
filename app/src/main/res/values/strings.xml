@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Timmer</string>
+    <string name="app_name">Kashif Mirza</string>
     <string name="str_link_one">Link 1</string>
     <string name="str_link_two">Link 2</string>
     <string name="str_link_three">Link 3</string>
@@ -12,4 +12,5 @@
     <string name="str_link_1_duration">Link 1 Duration</string>
     <string name="str_reset">Reset</string>
     <string name="str_kashif_mirza">Kashif Mirza</string>
+    <string name="str_youtube_link">https://youtube.com/c/KashifMirza</string>
 </resources>
